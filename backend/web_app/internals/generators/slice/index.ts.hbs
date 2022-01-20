@@ -1,0 +1,35 @@
+import { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from 'utils/@reduxjs/toolkit';
+{{#if wantSaga}}
+import { {{ camelCase sliceName }}Saga } from './saga';
+import { {{ properCase sliceName }}State } from './types';
+
+export const initialState: {{ properCase sliceName }}State = {};
+
+const slice = createSlice({
+  name: '{{ camelCase sliceName }}',
+  initialState,
+  reducers: {
+    someAction(state, action: PayloadAction<any>) {},
+  },
+});
+
+export const { actions: {{ camelCase sliceName }}Actions } = slice;
+
+export const use{{ properCase sliceName }}Slice = () => {
+  {{/if}}
+  return { actions: slice.actions };
+};
+export const {{ camelCase sliceName }}Reducer = slice.reducer;
+
+/**
+ * Example Usage:
+ *
+ * export function MyComponentNeedingThisSlice() {
+ *  const { actions } = use{{ properCase sliceName }}Slice();
+ *
+ *  const onButtonClick = (evt) => {
+ *    dispatch(actions.someAction());
+ *   };
+ * }
+ */
