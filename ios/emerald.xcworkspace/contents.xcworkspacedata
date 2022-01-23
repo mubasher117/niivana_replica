@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/macbook/Documents/src/work/react_native/emerald-bio-27652/ios/Niivana.xcodeproj">
+      location = "group:/Users/a123/Desktop/React-native/niivana_replica/ios/Niivana.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
