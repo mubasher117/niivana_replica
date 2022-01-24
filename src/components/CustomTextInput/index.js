@@ -51,7 +51,7 @@ export default class CustomTextInput extends Component {
           value={value}
           onSubmitEditing={onSubmitEditing}
           defaultValue={defaultValue}
-          // editable={editable}
+          editable={editable}
           multiline={multiline}
           numberOfLines={numberOfLines ? numberOfLines : 1}
           secureTextEntry={secureTextEntry}
