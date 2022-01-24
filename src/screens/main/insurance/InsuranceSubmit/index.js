@@ -12,6 +12,7 @@ import {
 } from "react-native"
 import SelectDropdown from "react-native-select-dropdown"
 import ModalDropdown from "react-native-modal-dropdown"
+import moment from "moment"
 import DatePicker from "react-native-date-picker"
 import Header from "../../../../components/Header"
 import { BaseColor } from "../../../../config"
@@ -31,9 +32,13 @@ const validationSchema = Yup.object().shape({
   phoneNumber: Yup.string().required("Enter Phone Number"),
   address1: Yup.string().required("Enter Address 1"),
   address2: Yup.string().required("Enter Address 2"),
-  city: Yup.string().required("Enter City"),
-  state: Yup.string().required("Enter State"),
-  zipCode: Yup.string().required("Enter Zip Code")
+  zipCode: Yup.string().required("Enter Zip Code"),
+  claimEmail: Yup.string().email("Enter Correct Email").required("Enter Email"),
+  claimAddress: Yup.string().required("Enter Address"),
+  claimZipCode: Yup.string().required("Enter Zip Code"),
+  firstName: Yup.string().required("Enter First Name"),
+  lastName: Yup.string().required("Enter Last Name"),
+  claimAddressExtension: Yup.string().required("Enter Address Extension")
 })
 
 const cities = ["New York", "Lorem", "Ispum"]
@@ -97,6 +102,7 @@ const InsuranceSubmit = () => {
                     <TouchableOpacity
                       style={{ padding: 5 }}
                       onPress={() => {
+                        formik.setErrors({ errors: {} })
                         setCardDetailOpen(!cardDetailOpen)
                       }}
                     >
@@ -106,6 +112,7 @@ const InsuranceSubmit = () => {
                     <TouchableOpacity
                       style={{ padding: 5 }}
                       onPress={() => {
+                        formik.setErrors({ errors: {} })
                         setCardDetailOpen(!cardDetailOpen)
                       }}
                     >
@@ -329,7 +336,7 @@ const InsuranceSubmit = () => {
                       placeholder="Address"
                       onChangeText={formik.handleChange("claimAddress")}
                       onBlur={formik.handleBlur("claimAddress")}
-                      value={formik.values.phoneNumber}
+                      value={formik.values.claimAddress}
                       hitSlop={{ top: 32, bottom: 8, left: 0, right: 500 }}
                       selectionColor={BaseColor.grayColor}
                     />
@@ -401,21 +408,71 @@ const InsuranceSubmit = () => {
                     {formik.touched.firstName && formik.errors.firstName && (
                       <Error message={formik.errors.firstName} />
                     )}
-                    {/* <DatePicker
+                    <CustomTextInput
+                      style={styles.input}
+                      inputStyle={styles.inputText}
+                      autoCorrect={false}
+                      placeholder="Address Extension"
+                      onChangeText={formik.handleChange(
+                        "claimAddressExtension"
+                      )}
+                      onBlur={formik.handleBlur("claimAddressExtension")}
+                      value={formik.values.claimAddressExtension}
+                      hitSlop={{ top: 32, bottom: 8, left: 0, right: 500 }}
+                      selectionColor={BaseColor.grayColor}
+                    />
+                    {formik.touched.claimAddressExtension &&
+                      formik.errors.claimAddressExtension && (
+                        <Error message={formik.errors.claimAddressExtension} />
+                      )}
+                    <CustomTextInput
+                      rightIcon={
+                        <TouchableOpacity
+                          style={{ padding: 5 }}
+                          onPress={() => {
+                            setOpen(true)
+                          }}
+                        >
+                          <DropDownOpen />
+                        </TouchableOpacity>
+                      }
+                      style={styles.input}
+                      inputStyle={[styles.inputText, { width: "93%" }]}
+                      autoCorrect={false}
+                      editable={false}
+                      placeholder="DOB"
+                      onChangeText={() => setOpen(true)}
+                      onBlur={formik.handleBlur("DOB")}
+                      value={formik.values.DOB}
+                      hitSlop={{ top: 32, bottom: 8, left: 0, right: 500 }}
+                      selectionColor={BaseColor.grayColor}
+                    />
+                    <DatePicker
+                      mode={"date"}
                       modal
-                      placeholder="Select Date"
-                      showIcon={true}
-                      format="DD-MM-YYYY"
-                      mode="date"
-                    /> */}
+                      open={open}
+                      date={date}
+                      onConfirm={date => {
+                        setOpen(false)
+                        setDate(date)
+                        formik.setFieldValue(
+                          "DOB",
+                          moment(date).format("MMM Do YY")
+                        )
+                      }}
+                      onCancel={() => {
+                        setOpen(false)
+                      }}
+                    />
                   </>
                 )}
               </View>
               <View style={styles.bottomContainer}>
+                {console.log(formik.isValid)}
                 <Button
                   //   loading={isLoading}
                   style={styles.createButton}
-                  // disabled={!(formik.isValid && formik.dirty && !isLoading)}
+                  disabled={!formik.isValid && formik.dirty}
                   onPress={formik.handleSubmit}
                 >
                   {"Submit".toUpperCase()}
