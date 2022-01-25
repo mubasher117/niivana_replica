@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
-  View,
-} from "react-native";
-import { BaseColor } from "../../config";
-import PropTypes from "prop-types";
-import Text from "../Text";
-import styles from "./styles";
-import LinearGradient from "react-native-linear-gradient";
+  View
+} from "react-native"
+import { BaseColor } from "../../config"
+import PropTypes from "prop-types"
+import Text from "../Text"
+import styles from "./styles"
+import LinearGradient from "react-native-linear-gradient"
 
 export default class Button extends Component {
   render() {
@@ -29,26 +29,26 @@ export default class Button extends Component {
       gradientColor,
       loadingColor,
       ...rest
-    } = this.props;
+    } = this.props
     if (gradient) {
       const gradientStartType = {
         normal: {
           start: { x: 0, y: 0 },
-          end: { x: 1, y: 0 },
+          end: { x: 1, y: 0 }
         },
         horizontalRight: {
           start: { x: 1, y: 0 },
-          end: { x: 0, y: 0 },
+          end: { x: 0, y: 0 }
         },
         vertivalUp: {
           start: { x: 0, y: 0 },
-          end: { x: 0, y: 1 },
+          end: { x: 0, y: 1 }
         },
         vertivalDown: {
           start: { x: 0, y: 1 },
-          end: { x: 0, y: 0 },
-        },
-      };
+          end: { x: 0, y: 0 }
+        }
+      }
       return (
         <LinearGradient
           start={
@@ -67,7 +67,7 @@ export default class Button extends Component {
             outline && styles.outline,
             full && styles.full,
             round && styles.round,
-            style,
+            style
           ])}
         >
           <TouchableOpacity
@@ -77,7 +77,7 @@ export default class Button extends Component {
               alignItems: "center",
               flexDirection: "row",
               backgroundColor: "transparent",
-              justifyContent: "center",
+              justifyContent: "center"
             }}
             disabled={loading || disabled}
             // activeOpacity={0.9}
@@ -87,7 +87,7 @@ export default class Button extends Component {
               style={[
                 styles.textDefault,
                 outline && styles.textOutline,
-                styleText,
+                styleText
               ]}
               numberOfLines={1}
             >
@@ -108,7 +108,7 @@ export default class Button extends Component {
             ) : null}
           </TouchableOpacity>
         </LinearGradient>
-      );
+      )
     }
     return (
       <TouchableOpacity
@@ -119,7 +119,7 @@ export default class Button extends Component {
           full && styles.full,
           round && styles.round,
           style,
-          disabled && styles.disabledContainer,
+          disabled && styles.disabledContainer
         ])}
         activeOpacity={0.9}
         disabled={loading || disabled}
@@ -132,7 +132,7 @@ export default class Button extends Component {
             disabled && styles.disabledText,
             black && { color: BaseColor.lightBlack },
             smallText && { fontSize: 14 },
-            styleText,
+            styleText
           ])}
           numberOfLines={1}
         >
@@ -146,7 +146,7 @@ export default class Button extends Component {
           />
         ) : null}
       </TouchableOpacity>
-    );
+    )
   }
 }
 // Button.propTypes = {
@@ -164,5 +164,5 @@ Button.defaultProps = {
   outline: false,
   full: false,
   round: false,
-  loading: false,
-};
+  loading: false
+}

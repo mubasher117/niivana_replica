@@ -56,6 +56,7 @@ import Zoom from "../screens/main/zoom"
 import OnBoarding from "../screens/OnBoarding"
 import InsuranceSubmit from "../screens/main/insurance/InsuranceSubmit"
 import InsuranceDetails from "../screens/main/insurance/InsuranceDetails"
+import Profile from "../screens/main/profile"
 import { retrieveData, clearStorage } from "../util/helpers"
 
 const DashboardStack = createNativeStackNavigator()
@@ -290,11 +291,12 @@ const AuthNav = () => (
     screenOptions={{
       headerShown: false
     }}
-    initialRouteName="InsuranceDetails"
+    initialRouteName="Profile"
   >
     <AuthStack.Screen name="SignUp" component={SignUp} />
     <AuthStack.Screen name="InsuranceSubmit" component={InsuranceSubmit} />
     <AuthStack.Screen name="InsuranceDetails" component={InsuranceDetails} />
+    <AuthStack.Screen name="Profile" component={Profile} />
     <AuthStack.Screen name="SignIn" component={SignIn} />
     <AuthStack.Screen name="ForgotPassword" component={ForgotPassword} />
     <AuthStack.Screen name="ResetPassword" component={ResetPassword} />
